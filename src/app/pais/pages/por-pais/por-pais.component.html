@@ -1,0 +1,36 @@
+<div class="animate__animated animate__backInLeft animate__faster">
+  <h2>Por Pais</h2>
+  <hr />
+
+  <div class="row">
+    <div class="col">
+      <app-pais-input
+        (onEnter)="buscar($event)"
+        (onDebounce)="sugerencias($event)"
+        placeholder="Buscar por pais"
+      ></app-pais-input>
+    </div>
+  </div>
+
+  <ul class="list-group">
+    <li
+      *ngFor="let paises of paisesSugeridos"
+      class="list-group-item list-group-item-action"
+      (click)="buscar(paises.name.common)"
+    >
+      {{ paises.name.common }}
+    </li>
+  </ul>
+
+  <hr />
+</div>
+
+<div *ngIf="hayError" class="alert alert-danger">
+  No se encontró nada con el termino
+</div>
+
+<div *ngIf="!hayError" class="row">
+  <div class="col">
+    <app-pais-tabla [data]="paises"></app-pais-tabla>
+  </div>
+</div>
